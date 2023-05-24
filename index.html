@@ -6,5 +6,14 @@
 <body>
     <h1>Welcome to My Portfolio</h1>
     <p>This is a sample portfolio page.</p>
+    <button id="colorChangeButton">Change Text Color</button>
+
+    <script>
+        document.getElementById('colorChangeButton').addEventListener('click', function() {
+            var colors = ["red", "blue", "green", "purple", "orange"];
+            var randomColor = colors[Math.floor(Math.random() * colors.length)];
+            document.body.style.color = randomColor;
+        });
+    </script>
 </body>
 </html>
