@@ -64,7 +64,17 @@
 
 
 
-
+ }
+        .btn, .footer-img, .globe-btn {
+            transition: transform 0.3s;
+        }
+        .btn:hover, .footer-img:hover, .globe-btn:hover {
+            transform: scale(1.2);
+        }
+        .globe-btn {
+            display: inline-block;
+            cursor: pointer;
+        }
 
 
 
@@ -193,32 +203,36 @@
         }
     </style>
     <script>
-    document.addEventListener("DOMContentLoaded", function(event) {
+<script>
+        document.addEventListener("DOMContentLoaded", function(event) {
 
-    var githubImg = document.getElementById("github-img");
-    var fiverrImg = document.getElementById("fiverr-img");
-    
-    function animateImageClick(imgElement) {
-        imgElement.style.transform = "scale(0.9)";
-        setTimeout(function() {
-            imgElement.style.transform = "scale(1)";
-        }, 100);
-    }
+        var githubImg = document.getElementById("github-img");
+        var fiverrImg = document.getElementById("fiverr-img");
+        var globeImg = document.getElementById("globe-img");
+        
+        function animateImageClick(imgElement) {
+            imgElement.style.transform = "scale(0.9)";
+            setTimeout(function() {
+                imgElement.style.transform = "scale(1)";
+            }, 100);
+        }
 
-    githubImg.addEventListener("click", function() {
-        animateImageClick(githubImg);
-    });
+        githubImg.addEventListener("click", function() {
+            animateImageClick(githubImg);
+        });
 
-    fiverrImg.addEventListener("click", function() {
-        animateImageClick(fiverrImg);
-    });
-});
+        fiverrImg.addEventListener("click", function() {
+            animateImageClick(fiverrImg);
+        });
 
+        globeImg.addEventListener("click", function() {
+            animateImageClick(globeImg);
+        });
     });
     </script>
 </head>
 <body>
-      <header>
+    <header>
         <h1>Warm Welcome  <span id="typing"></span></h1>
     </header>
     <div class="content">
@@ -228,7 +242,7 @@
             <br>
             <br>
             <br>
-            <img src="/assets/globe.gif" alt="Globe" width="30%" >
+            <a id="globe-img" class="globe-btn" href="#"><img src="/assets/globe.gif" alt="Globe" width="30%" ></a>
             <p><b>Feedback</b> from <b>friends</b> all over <b>the world</b></p>
         </div>
         <div class="main-content">
