@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Projects</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap" rel="stylesheet"> 
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            color: #3e3e3e;
+            font-family: 'Montserrat', sans-serif;
+            background-color: #e9ecef;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100%;
+        }
+        header {
+            width: 100%;
+            background: #495057;
+            color: #f8f9fa;
+            text-align: center;
+            padding: 20px 0;
+        }
+        h1 {
+            font-weight: 500;
+            font-size: 2.5em;
+        }
+        .content {
+            display: flex;
+            flex-direction: row;
+            flex: 1;
+            margin: 20px;
+        }
+        .sidebar {
+            width: 20%;
+            padding: 20px;
+            border-right: 1px solid #dee2e6;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .sidebar img {
+            width: 80%;
+            margin: 20px 0;
+        }
+        .main-content {
+            width: 80%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        footer {
+            background: #343a40;
+            color: #f8f9fa;
+            text-align: center;
+            padding: 20px 0;
+        }
+        .row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .btn {
+            background-color: #6c757d;
+            color: #f8f9fa;
+            transition: 0.3s;
+        }
+        .btn:hover {
+            background-color: #495057;
+            color: #f8f9fa;
+        }
+        section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            border: 1px solid #dee2e6;
+            padding: 20px;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+        section:hover {
+            transform: scale(1.02);
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function(event) {
+
+            var githubImg = document.getElementById("github-img");
+            var linkedinImg = document.getElementById("linkedin-img");
+
+            function animateImageClick(imgElement) {
+                imgElement.style.transform = "scale(0.9)";
+                setTimeout(function() {
+                    imgElement.style.transform = "scale(1)";
+                }, 100);
+            }
+
+            githubImg.addEventListener("click", function() {
+                animateImageClick(githubImg);
+            });
+
+            linkedinImg.addEventListener("click", function() {
+                animateImageClick(linkedinImg);
+            });
+        });
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Hello, Welcome to My Projects</h1>
+    </header>
+    <div class="content">
+        <div class="sidebar">
+            <img src="profilepic.jpg" alt="Profile Picture">
+            <p>Follow my journey as a software developer. Find inspiration and feel free to reach out.</p>
+        </div>
+        <div class="main-content">
+            <h2>Latest Projects</h2>
+            <div class="row">
+                <section>
+                    <h3>Project One</h3>
+                    <p>Information about Project One</p>
+                    <a href="#"><button class="btn btn-primary btn-lg">View Details</button></a>
+                </section>
+                <section>
+                    <h3>Project Two</h3>
+                    <p>Information about Project Two</p>
+                    <a href="#"><button class="btn btn-primary btn-lg">View Details</button></a>
+                </section>
+            </div>
+            <div class="row">
+                <section>
+                    <h3>Project Three</h3>
+                    <p>Information about Project Three</p>
+                    <a href="#"><button class="btn btn-primary btn-lg">View Details</button></a>
+                </section>
+                <section>
+                    <h3>Project Four</h3>
+                    <p>Information about Project Four</p>
+                    <a href="#"><button class="btn btn-primary btn-lg">View Details</button></a>
+                </section>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <a href="#"><img src="github.png" id="github-img" alt="Github"> Github</a>
+        <a href="#"><img src="linkedin.png" id="linkedin-img" alt="LinkedIn">LinkedIn</a>
+    </footer>
+</body>
+</html>
