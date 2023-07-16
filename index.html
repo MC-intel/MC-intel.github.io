@@ -9,18 +9,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet"> 
     <style>
         body {
-    display: flex;
-    flex-direction: column;
-    color: #666666;
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    width: 100%;
-    background: linear-gradient(270deg, #f0f0f0, #d1c4e9, #b39ddb);
-    background-size: 600% 600%;
-    animation: AnimationName 3s ease infinite;
-}
+            display: flex;
+            flex-direction: column;
+            color: #666666;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100%;
+            background: #f0f0f0;
+        }
         header {
             width: 100%;
             background: linear-gradient(to bottom, lightblue, #f0f0f0);
@@ -37,18 +35,18 @@
         }
         .bordered-image {
             display: block;
-            width: 300px; /* adjust this pixel value according to your preference */
-            height: 250px; /* adjust this pixel value according to your preference */
+            width: 300px; 
+            height: 250px; 
             border: 1px solid black;
         }
         .top-text {
     position: absolute;
     top: 50%;
     left: 0;
-    width: 300px; /* should match the width of the image */
-    height: 1.5em; /* set the height to the same height as the line-height in .scrolling-text */
-    line-height: 1.0em; /* should match the line-height in .scrolling-text */
-    transform: translateY(-50%); /* adjust the y-position so the text is centered vertically in the image */
+    width: 300px; 
+    height: 1.5em; 
+    line-height: 1.0em; 
+    transform: translateY(-50%); 
     text-align: center;
     overflow: hidden;
     background-color: white; /* creates a white banner */
@@ -78,7 +76,11 @@
             cursor: pointer;
         }
 
-
+       .btn:hover {
+            background-color: gray;
+            color: white;
+            animation: AnimationName 3s ease infinite;
+        }
 
         h1 {
             color: #4B0082;
