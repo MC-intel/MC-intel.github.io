@@ -18,12 +18,21 @@
             width: 100%;
             background: #f0f0f0;
         }
-        header {
-            width: 100%;
-            background: linear-gradient(to bottom, lightblue, #f0f0f0);
-            text-align: left;
-            padding: 10px 0;
-        }
+header {
+    width: 100%;
+    background: linear-gradient(to bottom, lightblue, #f0f0f0);
+    text-align: left;
+    padding: 10px 0;
+    position: fixed;
+    top: 0;
+    z-index: 1000;  /* add this line back */
+}
+
+
+.spacer {
+    height: 50px; /* adjust this as per the height of your header */
+}
+
 	.image-container {
             position: relative;
             display: inline-block;
@@ -254,6 +263,7 @@ footer {
     <header>
         <h1>Warm Welcome  <span id="typing"></span></h1>
     </header>
+    <div class="spacer"></div>
     <div class="content">
         <div class="sidebar">
             <img src="/assets/uplog.png" alt="logo" style="width:50%;">
