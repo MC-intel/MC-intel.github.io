@@ -19,7 +19,6 @@
             background: #f0f0f0;
         }
         header {
-	    position: fixed;
             width: 100%;
             background: linear-gradient(to bottom, lightblue, #f0f0f0);
             text-align: left;
@@ -248,8 +247,6 @@ footer {
         globeImg.addEventListener("click", function() {
             animateImageClick(globeImg);
         });
-
-
     });
     </script>
 </head>
@@ -314,26 +311,5 @@ footer {
         <a href="#" class="btn btn-info btn-sm">Other</a>
 	<br>
     </footer>
-
-
-<script>
-window.onscroll = function() {addFixedHeader()};
-
-var header = document.getElementsByTagName('header')[0];
-
-var sticky = header.offsetTop;
-
-function addFixedHeader() {
-  if (window.pageYOffset > sticky) {
-    header.classList.add("fixed-header");
-    document.body.style.paddingTop = header.offsetHeight + 'px';
-  } else {
-    header.classList.remove("fixed-header");
-    document.body.style.paddingTop = '0px';
-  }
-}
-</script>
-
-
 </body>
 </html>
