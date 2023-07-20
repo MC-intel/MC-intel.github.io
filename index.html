@@ -247,6 +247,22 @@ footer {
         globeImg.addEventListener("click", function() {
             animateImageClick(globeImg);
         });
+
+
+window.onscroll = function() {addFixedHeader()};
+
+var header = document.getElementsByTagName('header')[0];
+
+var sticky = header.offsetTop;
+
+function addFixedHeader() {
+  if (window.pageYOffset > sticky) {
+    header.classList.add("fixed-header");
+    document.body.style.paddingTop = header.offsetHeight + 'px';
+  } else {
+    header.classList.remove("fixed-header");
+    document.body.style.paddingTop = '0px';
+  }
     });
     </script>
 </head>
