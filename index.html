@@ -106,14 +106,15 @@ header {
             color: #000000;
             font-weight: bold;
         }
-        .sidebar {
-            display: flex;
-            flex-direction: column-reverse;
-            align-items: center;
-            width: 15%;
-            padding: 20px;
-            border-right: 1px solid #dddddd;
-        }
+  .sidebar {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    width: 15%;
+    padding: 20px;
+    border-right: 1px solid #dddddd;
+    box-sizing: border-box;
+}
     .sidebar img:first-child {
         margin-bottom: 350px; 
     }
@@ -130,12 +131,12 @@ header {
         .sidebar a:hover {
             color: #008000;
         }
-        .main-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 80%;
-        }
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+}
 footer {
     display: flex;
     justify-content: center; /* center items horizontally in the footer */
