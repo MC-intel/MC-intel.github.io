@@ -106,14 +106,14 @@ header {
             color: #000000;
             font-weight: bold;
         }
-  .sidebar {
+.sidebar {
     display: flex;
     flex-direction: column-reverse;
     align-items: center;
     width: 15%;
-    padding: 10px;
-    border-right: 2px solid #dddddd;
-    box-sizing: border-box;
+    padding: 20px;
+    border-right: 1px solid #dddddd;
+    box-sizing: border-box; /* Add this */
 }
     .sidebar img:first-child {
         margin-bottom: 350px; 
@@ -135,7 +135,9 @@ header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 80%;
+    width: 75%; /* Reduce the width here */
+    margin-left: 5%; /* Add a left margin */
+    box-sizing: border-box; /* Add this */
 }
 footer {
     display: flex;
