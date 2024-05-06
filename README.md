@@ -1,1 +1,1 @@
-Portfolio webpage hosted by Github Pages. 
+Portfolio webpage hosted with Github Pages. 
