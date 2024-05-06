@@ -1,30 +1,23 @@
-// Replace with your actual OpenAI API key
 const OPENAI_API_KEY = 'sk-proj-nzK26xwS0iFK4fawozwAT3BlbkFJZw5iWdUysvzBInLPntI0';
 
-// Embed your resume data directly into the JavaScript
 const resumeData = `
-
-
-
 Michael Crawford
 922 Stone Crossing Dr.
 Wentzville, MO 63385
 Mobile: (636) 357-7823
 Email: acemcemail@gmail.com, midwestmichael636@gmail.com
- 
+
 LinkedIn: www.linkedin.com/in/michael-crawford-b49668219/ 
 GitHub: https://github.com/MC-intel
 Webpage: https://mc-intel.github.io/ 
 Fiverr: https://www.fiverr.com/michael_dev_stl 
+
 ㅡ
 Summary:
-
 Comfortable in dynamic, and rigid environments alike. Team player.
 An emphasis of skill in: Programming, Automation, Maintenance, and Project Management. 
 ㅡ
 Experience
-
-
 Bayer,  Hazelwood, MO;  Chesterfield, MO  Maintenance Supervisor- Continuity and Innovation   full-time
 Jan 2022-
 
@@ -61,7 +54,6 @@ Oct 2018-May 2019,
 Scanned and sorted high volumes of parcels with limited time. Interacted with scanning software to prepare loads for shipment. Helped reduce department misloads to <1%.
 ㅡ
 Education:
-
 SCC: community college, St. Peters, MO- some college credit  
 Aug 2019-
 Christian Hospital, St. Louis, MO- Vocational Certifications 
@@ -71,51 +63,58 @@ Holt HighSchool, Wentzville, MO —High School Diploma
 Lewis and Clark Tech, St. Charles, MO  —Vocational Certifications  Aug 2017- May 2018
 ㅡ
 Highlights:
-
-
-
 Familiar:  LEAN processes, Agile and Dev-Ops, Data Integrity, Quality and Safety, Troubleshooting
 Proficient:  Python, JavaScript, Bash
-
 EMS training: BLS Certifications (CPR/AED)
 BJC Lab-Certified Trainer: (phlebotomy)
 Blood Drive Organizer/Participant via SkillsUSA
-
 Software development experience using:
-Windows, Linux, Ras-Pi, Git, Docker, AWS, Azure, GoogleCloud, Vercel, React, Node.js, Flask, MongoDB, Kaggle, Huggingface, OpenAi and OpenAPI. 
-
-
-
+Windows, Linux, Ras-Pi, Git, Docker, AWS, Azure, GoogleCloud, Vercel, React, Node.js, Flask, MongoDB, Kaggle, Huggingface, OpenAi and OpenAPI.
 `;
 
-// Fetch GPT Response
 async function fetchGPTResponse(prompt) {
-  const response = await fetch('https://api.openai.com/v1/completions', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${OPENAI_API_KEY}`
-    },
-    body: JSON.stringify({
-      model: 'text-davinci-003',
-      prompt: prompt,
-      max_tokens: 150
-    })
-  });
+  try {
+    const response = await fetch('https://api.openai.com/v1/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${OPENAI_API_KEY}`
+      },
+      body: JSON.stringify({
+        model: 'text-davinci-003',
+        prompt: prompt,
+        max_tokens: 150
+      })
+    });
 
-  const data = await response.json();
-  return data.choices[0].text.trim();
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error(`API Error (${response.status}):`, errorText);
+      return 'Error fetching response';
+    }
+
+    const data = await response.json();
+
+    if (!data.choices || data.choices.length === 0) {
+      console.error('API returned no choices');
+      return 'No response choices available';
+    }
+
+    return data.choices[0].text.trim();
+  } catch (error) {
+    console.error('Fetch error:', error);
+    return 'Fetch error occurred';
+  }
 }
 
-// Update Chat Interface
 function updateChat(userInput, botResponse) {
   const chatMessageContainer = document.getElementById('chatMessageContainer');
   const userMessage = document.createElement('div');
-  userMessage.className = 'user-message d-flex justify-content-end';
+  userMessage.className = 'user-message d-flex justify-content-end mb-2';
   userMessage.innerHTML = `<div class="alert alert-success"><strong>You:</strong> ${userInput}</div>`;
 
   const botMessage = document.createElement('div');
-  botMessage.className = 'bot-message d-flex justify-content-start';
+  botMessage.className = 'bot-message d-flex justify-content-start mb-2';
   botMessage.innerHTML = `<div class="alert alert-secondary"><strong>Bot:</strong> ${botResponse}</div>`;
 
   chatMessageContainer.appendChild(userMessage);
@@ -124,7 +123,6 @@ function updateChat(userInput, botResponse) {
   document.getElementById('chatWindow').scrollTop = chatMessageContainer.scrollHeight;
 }
 
-// Send Message
 document.getElementById('sendButton').addEventListener('click', async () => {
   const userInput = document.getElementById('userInput').value.trim();
   const promptInput = document.getElementById('promptInput').value.trim();
