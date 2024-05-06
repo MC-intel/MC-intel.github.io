@@ -1,4 +1,4 @@
-const OPENAI_API_KEY = 'sk-proj-kTEAW1yFcCt6zRmHPynYT3BlbkFJk5SsTvVVJWinD4FsHmaf';
+const OPENAI_API_KEY = 'sk-proj-sLcrR1T8TJwG8LJvEwfVT3BlbkFJtIOkml9rV4qNlFIMZBk2';
 
 const resumeData = `
 Michael Crawford
