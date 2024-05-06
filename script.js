@@ -1,5 +1,5 @@
 // Replace with your actual OpenAI API key
-const OPENAI_API_KEY = 'YOUR_OPENAI_API_KEY';
+const OPENAI_API_KEY = 'sk-proj-nzK26xwS0iFK4fawozwAT3BlbkFJZw5iWdUysvzBInLPntI0';
 
 // Embed your resume data directly into the JavaScript
 const resumeData = `
