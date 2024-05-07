@@ -1,111 +1,54 @@
-const resumeData = `
-Michael Crawford
-922 Stone Crossing Dr.
-Wentzville, MO 63385
-...
-`;
+// Replace with your actual Google Apps Script Web App URL
+const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycby4BJMSJMqEdJ14WRnpWU3HUki1ehphAKliXAP2jcH6RPuxXYhFnBLL-mABe9J0WWvKcA/exec';
 
-/**
- * Fetch the OpenAI API Key securely from the Google Apps Script endpoint.
- * @returns {string} - The OpenAI API Key.
- */
-async function fetchAPIKey() {
-  // Replace with your Google Apps Script Web App deployment URL
-  const endpoint = "https://script.google.com/macros/s/1ClIRW1-023eNAqO5W37JY_YYyd94B2Qy9Zg5BHkKTdsW5nVKSq-NCyfe/exec";
+async function fetchOpenAiApiKey() {
   try {
-    const response = await fetch(endpoint, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
+    const response = await fetch(WEB_APP_URL);
     if (!response.ok) {
-      throw new Error(`Error fetching API Key: ${response.status}`);
-    }
-    const data = await response.json();
-    return data.api_key; // Return the OpenAI API Key
-  } catch (error) {
-    console.error('API Key fetch error:', error);
-    return '';
-  }
-}
-
-/**
- * Fetch a GPT response using the OpenAI API with a secure key.
- * @param {string} prompt - The prompt to send to the OpenAI model.
- * @returns {string} - The GPT model's response.
- */
-async function fetchGPTResponse(prompt) {
-  const OPENAI_API_KEY = await fetchAPIKey(); // Fetch the OpenAI API Key securely
-  if (!OPENAI_API_KEY) {
-    console.error('Missing OpenAI API Key');
-    return 'Error: Missing API Key';
-  }
-
-  try {
-    const response = await fetch('https://api.openai.com/v1/completions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${OPENAI_API_KEY}` // Use the fetched API key
-      },
-      body: JSON.stringify({
-        model: 'text-davinci-003',
-        prompt: prompt,
-        max_tokens: 150
-      })
-    });
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error(`API Error (${response.status}):`, errorText);
-      return 'Error fetching response';
+      throw new Error('Network response was not ok');
     }
 
     const data = await response.json();
+    const apiKey = data.api_key;
 
-    if (!data.choices || data.choices.length === 0) {
-      console.error('API returned no choices');
-      return 'No response choices available';
+    if (!apiKey) {
+      throw new Error('API key could not be retrieved from the web app.');
     }
 
-    return data.choices[0].text.trim(); // Return the GPT response
+    return apiKey;
   } catch (error) {
-    console.error('Fetch error:', error);
-    return 'Fetch error occurred';
+    console.error(`Error: ${error.message}`);
+    return null;
   }
 }
 
-/**
- * Update the chat interface with user input and bot response.
- * @param {string} userInput - The user's input query.
- * @param {string} botResponse - The bot's response.
- */
-function updateChat(userInput, botResponse) {
-  const chatMessageContainer = document.getElementById('chatMessageContainer');
-  const userMessage = document.createElement('div');
-  userMessage.className = 'user-message d-flex justify-content-end mb-2';
-  userMessage.innerHTML = `<div class="alert alert-success"><strong>You:</strong> ${userInput}</div>`;
+async function exampleOpenAiApiRequest() {
+  const apiKey = await fetchOpenAiApiKey();
+  if (!apiKey) {
+    console.error('Failed to retrieve the OpenAI API Key');
+    return;
+  }
 
-  const botMessage = document.createElement('div');
-  botMessage.className = 'bot-message d-flex justify-content-start mb-2';
-  botMessage.innerHTML = `<div class="alert alert-secondary"><strong>Bot:</strong> ${botResponse}</div>`;
+  const url = 'https://api.openai.com/v1/models';
+  const options = {
+    method: 'GET',
+    headers: {
+      'Authorization': `Bearer ${apiKey}`
+    }
+  };
 
-  chatMessageContainer.appendChild(userMessage);
-  chatMessageContainer.appendChild(botMessage);
+  try {
+    const response = await fetch(url, options);
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
 
-  document.getElementById('chatWindow').scrollTop = chatMessageContainer.scrollHeight;
+    const jsonResponse = await response.json();
+    console.log(jsonResponse);
+  } catch (error) {
+    console.error(`Error: ${error.message}`);
+  }
 }
 
-document.getElementById('sendButton').addEventListener('click', async () => {
-  const userInput = document.getElementById('userInput').value.trim();
-  const promptInput = document.getElementById('promptInput').value.trim();
-
-  if (userInput) {
-    const combinedPrompt = `${promptInput}\n\nResume Data: ${resumeData}\n\nUser Query: ${userInput}`;
-    const botResponse = await fetchGPTResponse(combinedPrompt);
-
-    updateChat(userInput, botResponse);
-    document.getElementById('userInput').value = '';
-  }
-});
+// Usage example
+exampleOpenAiApiRequest();
