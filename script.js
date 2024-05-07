@@ -6,7 +6,7 @@ Wentzville, MO 63385
 `;
 
 async function fetchAPIKey() {
-  const endpoint = "https://script.google.com/macros/s/AKfycbxZex4KMqB1jtRENvbqH66ujgwByeV5tFhVnvHCudyTIvBcQ11GCkl3u3hXK6Q3bfvMPg/exec";
+  const endpoint = "https://script.google.com/macros/s/AKfycbx6eDrZ1NIbF4qLuBKCXIGLyc8UZsN_qs7n5PYyj0Aa4Kwl13TOFMM0sIF8I9nqewBCNQ/exec";
   try {
     const response = await fetch(endpoint, {
       method: 'GET',
