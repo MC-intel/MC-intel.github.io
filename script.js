@@ -71,7 +71,7 @@ Windows, Linux, Ras-Pi, Git, Docker, AWS, Azure, GoogleCloud, Vercel, React, Nod
 `;
 
 async function fetchAPIKey() {
-  const endpoint = "https://script.google.com/macros/s/AKfycbyqCy1yi5Wf7YHuMzAdkAhHjQ8qkeRJeTYJgw6b2zHVVP-HORXoWr7k1P_DYbs6LHyMmw/exec"; 
+  const endpoint = "https://script.google.com/macros/s/AKfycbwcn89dzj00CzLdkUz1pmh6JX_Spq6NQh3Shsxzdgwg9frp_KKj50Jipa-4QVes-q4FSg/exec"; 
   try {
     const response = await fetch(endpoint, {
       method: 'GET',
