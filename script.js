@@ -1,5 +1,5 @@
 // Replace with your actual Google Apps Script Web App URL
-const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyBfK0Fqazycu3xwKyib-BjhThKtogZuCPUlPqDugHzOCupja0Y9wR_8A9g0bK7fUFNgg/exec';
+const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycby4BJMSJMqEdJ14WRnpWU3HUki1ehphAKliXAP2jcH6RPuxXYhFnBLL-mABe9J0WWvKcA/exec';
 
 async function fetchOpenAiApiKey() {
   try {
