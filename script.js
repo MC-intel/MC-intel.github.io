@@ -5,8 +5,13 @@ Wentzville, MO 63385
 ...
 `;
 
+/**
+ * Fetch the OpenAI API Key securely from the Google Apps Script endpoint.
+ * @returns {string} - The OpenAI API Key.
+ */
 async function fetchAPIKey() {
-  const endpoint = "https://script.google.com/macros/s/AKfycbx6eDrZ1NIbF4qLuBKCXIGLyc8UZsN_qs7n5PYyj0Aa4Kwl13TOFMM0sIF8I9nqewBCNQ/exec";
+  // Replace with your Google Apps Script Web App deployment URL
+  const endpoint = "https://script.google.com/macros/s/AKfycbxRT4_-X37au7tAyb4EnBlNOSYOUrpeCD8gw2jIzwjFIEeJSxS54L3gFj89T_cRKXqxow/exec";
   try {
     const response = await fetch(endpoint, {
       method: 'GET',
@@ -18,15 +23,20 @@ async function fetchAPIKey() {
       throw new Error(`Error fetching API Key: ${response.status}`);
     }
     const data = await response.json();
-    return data.apiKey;
+    return data.apiKey; // Return the OpenAI API Key
   } catch (error) {
     console.error('API Key fetch error:', error);
     return '';
   }
 }
 
+/**
+ * Fetch a GPT response using the OpenAI API with a secure key.
+ * @param {string} prompt - The prompt to send to the OpenAI model.
+ * @returns {string} - The GPT model's response.
+ */
 async function fetchGPTResponse(prompt) {
-  const OPENAI_API_KEY = await fetchAPIKey();
+  const OPENAI_API_KEY = await fetchAPIKey(); // Fetch the OpenAI API Key securely
   if (!OPENAI_API_KEY) {
     console.error('Missing OpenAI API Key');
     return 'Error: Missing API Key';
@@ -37,7 +47,7 @@ async function fetchGPTResponse(prompt) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${OPENAI_API_KEY}`
+        'Authorization': `Bearer ${OPENAI_API_KEY}` // Use the fetched API key
       },
       body: JSON.stringify({
         model: 'text-davinci-003',
@@ -59,13 +69,18 @@ async function fetchGPTResponse(prompt) {
       return 'No response choices available';
     }
 
-    return data.choices[0].text.trim();
+    return data.choices[0].text.trim(); // Return the GPT response
   } catch (error) {
     console.error('Fetch error:', error);
     return 'Fetch error occurred';
   }
 }
 
+/**
+ * Update the chat interface with user input and bot response.
+ * @param {string} userInput - The user's input query.
+ * @param {string} botResponse - The bot's response.
+ */
 function updateChat(userInput, botResponse) {
   const chatMessageContainer = document.getElementById('chatMessageContainer');
   const userMessage = document.createElement('div');
