@@ -1,5 +1,3 @@
-const OPENAI_API_KEY = '';
-
 const resumeData = `
 Michael Crawford
 922 Stone Crossing Dr.
@@ -72,7 +70,28 @@ Software development experience using:
 Windows, Linux, Ras-Pi, Git, Docker, AWS, Azure, GoogleCloud, Vercel, React, Node.js, Flask, MongoDB, Kaggle, Huggingface, OpenAi and OpenAPI.
 `;
 
+async function fetchAPIKey() {
+  const endpoint = "https://script.google.com/macros/s/AKfycbxcZLj2XNNJYObua_FTS1X81YdM0WrVro9m0h-J2HLmbMfa3jpty1ACE0eJ0T91nXdwew/exec"; // web app URL
+  try {
+    const response = await fetch(endpoint);
+    if (!response.ok) {
+      throw new Error(`Error fetching API Key: ${response.status}`);
+    }
+    const data = await response.json();
+    return data.apiKey;
+  } catch (error) {
+    console.error('API Key fetch error:', error);
+    return '';
+  }
+}
+
 async function fetchGPTResponse(prompt) {
+  const OPENAI_API_KEY = await fetchAPIKey();
+  if (!OPENAI_API_KEY) {
+    console.error('Missing OpenAI API Key');
+    return 'Error: Missing API Key';
+  }
+
   try {
     const response = await fetch('https://api.openai.com/v1/completions', {
       method: 'POST',
