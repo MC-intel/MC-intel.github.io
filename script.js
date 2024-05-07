@@ -71,9 +71,14 @@ Windows, Linux, Ras-Pi, Git, Docker, AWS, Azure, GoogleCloud, Vercel, React, Nod
 `;
 
 async function fetchAPIKey() {
-  const endpoint = "https://script.google.com/macros/s/AKfycbxwbC-LyKrvz64pO4FGVYe88BpGjS7IoWCxM2XvbFUKbwrAxGThA_YFk0bw4dGCKW4WlQ/exec"; 
+  const endpoint = "https://script.google.com/macros/s/AKfycbz8OJuScy0mLyiWyKD2TGGhbrs99CzZhpprBd7UxYp1I0S3WebRF0GU4KDtNIg9RRZDMA/exec"; 
   try {
-    const response = await fetch(endpoint);
+    const response = await fetch(endpoint, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
     if (!response.ok) {
       throw new Error(`Error fetching API Key: ${response.status}`);
     }
