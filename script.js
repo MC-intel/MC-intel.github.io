@@ -11,7 +11,7 @@ Wentzville, MO 63385
  */
 async function fetchAPIKey() {
   // Replace with your Google Apps Script Web App deployment URL
-  const endpoint = "https://script.google.com/macros/s/AKfycby3gEbyd8DqXjP017hPZT5w2WiaUrJQZb2jl3tsRz-fxXEvD0YPknEK1jRIJKI3DsWmMA/exec";
+  const endpoint = "https://script.google.com/macros/s/AKfycbxBcKumFMPOjhUKIyJERQ7LYaVNHI_9hKWArel0RvUmg4KYgivmMYks_M-9g66BLR4vcA/exec";
   try {
     const response = await fetch(endpoint, {
       method: 'GET',
@@ -23,7 +23,7 @@ async function fetchAPIKey() {
       throw new Error(`Error fetching API Key: ${response.status}`);
     }
     const data = await response.json();
-    return data.apiKey; // Return the OpenAI API Key
+    return data.api_key; // Return the OpenAI API Key
   } catch (error) {
     console.error('API Key fetch error:', error);
     return '';
