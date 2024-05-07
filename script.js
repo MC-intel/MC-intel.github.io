@@ -11,7 +11,7 @@ Wentzville, MO 63385
  */
 async function fetchAPIKey() {
   // Replace with your Google Apps Script Web App deployment URL
-  const endpoint = "https://script.google.com/macros/s/AKfycbxRT4_-X37au7tAyb4EnBlNOSYOUrpeCD8gw2jIzwjFIEeJSxS54L3gFj89T_cRKXqxow/exec";
+  const endpoint = "https://script.google.com/macros/s/AKfycby8iNq3QeJeIdohoaohizoWew_8uCcRgNtyGT_q-fMvEB0Ns7A18aMFqKKBtbrmavFopg/exec";
   try {
     const response = await fetch(endpoint, {
       method: 'GET',
