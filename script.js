@@ -22,7 +22,7 @@ async function fetchOpenAiApiKey() {
   }
 }
 
-async function exampleOpenAiApiRequest() {
+async function makeOpenAiApiRequest(prompt) {
   const apiKey = await fetchOpenAiApiKey();
   if (!apiKey) {
     console.error('Failed to retrieve the OpenAI API Key');
@@ -30,12 +30,21 @@ async function exampleOpenAiApiRequest() {
     return;
   }
 
-  const url = 'https://api.openai.com/v1/models';
+  const url = 'https://api.openai.com/v1/chat/completions';
+  const body = JSON.stringify({
+    model: 'gpt-3.5-turbo',
+    messages: [{ role: 'user', content: prompt }],
+    max_tokens: 100,
+    temperature: 0.7
+  });
+
   const options = {
-    method: 'GET',
+    method: 'POST',
     headers: {
-      'Authorization': `Bearer ${apiKey}`
-    }
+      'Authorization': `Bearer ${apiKey}`,
+      'Content-Type': 'application/json'
+    },
+    body
   };
 
   try {
@@ -45,8 +54,9 @@ async function exampleOpenAiApiRequest() {
     }
 
     const jsonResponse = await response.json();
-    console.log(jsonResponse);
-    displayResponse(JSON.stringify(jsonResponse, null, 2));
+    const message = jsonResponse.choices[0].message.content.trim();
+    console.log(message);
+    displayResponse(message);
   } catch (error) {
     console.error(`Error: ${error.message}`);
     displayResponse(`Error: ${error.message}`);
@@ -58,5 +68,8 @@ function displayResponse(message) {
   responseDisplay.textContent = message;
 }
 
-// Add event listener to the button to trigger the API request
-document.getElementById('apiRequestButton').addEventListener('click', exampleOpenAiApiRequest);
+// Add event listener to the button to trigger the OpenAI API request
+document.getElementById('sendButton').addEventListener('click', () => {
+  const chatInput = document.getElementById('chatInput').value;
+  makeOpenAiApiRequest(chatInput);
+});
