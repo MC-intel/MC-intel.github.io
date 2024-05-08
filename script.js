@@ -22,7 +22,7 @@ async function fetchOpenAiApiKey() {
   }
 }
 
-async function makeOpenAiApiRequest(prompt) {
+async function makeOpenAiApiRequestWithBackoff(prompt, retries = 3, delay = 1000) {
   const apiKey = await fetchOpenAiApiKey();
   if (!apiKey) {
     console.error('Failed to retrieve the OpenAI API Key');
@@ -47,20 +47,33 @@ async function makeOpenAiApiRequest(prompt) {
     body
   };
 
-  try {
-    const response = await fetch(url, options);
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
-    }
+  for (let i = 0; i < retries; i++) {
+    try {
+      const response = await fetch(url, options);
+      if (response.status === 429) {
+        const retryAfter = response.headers.get('Retry-After');
+        const waitTime = retryAfter ? parseInt(retryAfter, 10) * 1000 : delay * Math.pow(2, i);
+        console.warn(`Too Many Requests: Retrying in ${waitTime / 1000} seconds.`);
+        await new Promise(res => setTimeout(res, waitTime));
+        continue;
+      }
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
 
-    const jsonResponse = await response.json();
-    const message = jsonResponse.choices[0].message.content.trim();
-    console.log(message);
-    displayResponse(message);
-  } catch (error) {
-    console.error(`Error: ${error.message}`);
-    displayResponse(`Error: ${error.message}`);
+      const jsonResponse = await response.json();
+      const message = jsonResponse.choices[0].message.content.trim();
+      console.log(message);
+      displayResponse(message);
+      return;
+    } catch (error) {
+      console.error(`Error: ${error.message}`);
+      displayResponse(`Error: ${error.message}`);
+    }
   }
+
+  console.error('Exceeded maximum retries.');
+  displayResponse('Exceeded maximum retries.');
 }
 
 function displayResponse(message) {
@@ -68,8 +81,8 @@ function displayResponse(message) {
   responseDisplay.textContent = message;
 }
 
-// Add event listener to the button to trigger the OpenAI API request
+// Add event listener to the button to trigger the OpenAI API request with backoff
 document.getElementById('sendButton').addEventListener('click', () => {
   const chatInput = document.getElementById('chatInput').value;
-  makeOpenAiApiRequest(chatInput);
+  makeOpenAiApiRequestWithBackoff(chatInput);
 });
