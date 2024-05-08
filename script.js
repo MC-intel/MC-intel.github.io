@@ -34,7 +34,7 @@ async function makeOpenAiApiRequestWithBackoff(prompt, retries = 3, delay = 1000
   const body = JSON.stringify({
     model: 'gpt-3.5-turbo',
     messages: [{ role: 'user', content: prompt }],
-    max_tokens: 100,
+    max_tokens: 1000,
     temperature: 0.7
   });
 
@@ -54,6 +54,7 @@ async function makeOpenAiApiRequestWithBackoff(prompt, retries = 3, delay = 1000
         const retryAfter = response.headers.get('Retry-After');
         const waitTime = retryAfter ? parseInt(retryAfter, 10) * 1000 : delay * Math.pow(2, i);
         console.warn(`Too Many Requests: Retrying in ${waitTime / 1000} seconds.`);
+        displayResponse(`Too Many Requests: Retrying in ${waitTime / 1000} seconds.`);
         await new Promise(res => setTimeout(res, waitTime));
         continue;
       }
