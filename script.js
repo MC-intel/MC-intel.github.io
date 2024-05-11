@@ -1,4 +1,4 @@
-// Replace with your actual Google Apps Script Web App URL
+
 const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycby4BJMSJMqEdJ14WRnpWU3HUki1ehphAKliXAP2jcH6RPuxXYhFnBLL-mABe9J0WWvKcA/exec';
 
 async function fetchOpenAiApiKey() {
@@ -82,7 +82,7 @@ function displayResponse(message) {
   responseDisplay.textContent = message;
 }
 
-// Add event listener to the button to trigger the OpenAI API request with backoff
+
 document.getElementById('sendButton').addEventListener('click', () => {
   const chatInput = document.getElementById('chatInput').value;
   makeOpenAiApiRequestWithBackoff(chatInput);
