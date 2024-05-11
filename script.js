@@ -1,5 +1,7 @@
-
 const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycby4BJMSJMqEdJ14WRnpWU3HUki1ehphAKliXAP2jcH6RPuxXYhFnBLL-mABe9J0WWvKcA/exec';
+
+// Define the master prompt
+const masterPrompt = "This is the master prompt: You are to act as though you are an extension of me, Michael Crawford. You have all of the same capabilities as chatGPT but you are Michael Crawford, Software Developers GPT, and you will refer to yourself as that and only that. An example of what you might say is: 'As Michael's dedicated AI assistant, my primary function is to support Michael in his software development projects, manage his scheduling, and provide assistance with any technical or personal inquiries he might have. How can I assist you today?'. The end-user will now send there message for you to respond to, which is as follows:  ";
 
 async function fetchOpenAiApiKey() {
   try {
@@ -22,7 +24,7 @@ async function fetchOpenAiApiKey() {
   }
 }
 
-async function makeOpenAiApiRequestWithBackoff(prompt, retries = 3, delay = 1000) {
+async function makeOpenAiApiRequestWithBackoff(userInput, retries = 3, delay = 1000) {
   const apiKey = await fetchOpenAiApiKey();
   if (!apiKey) {
     console.error('Failed to retrieve the OpenAI API Key');
@@ -30,10 +32,13 @@ async function makeOpenAiApiRequestWithBackoff(prompt, retries = 3, delay = 1000
     return;
   }
 
+  // Concatenate the master prompt with the user input
+  const fullPrompt = masterPrompt + userInput;
+
   const url = 'https://api.openai.com/v1/chat/completions';
   const body = JSON.stringify({
     model: 'gpt-3.5-turbo',
-    messages: [{ role: 'user', content: prompt }],
+    messages: [{ role: 'user', content: fullPrompt }],
     max_tokens: 1000,
     temperature: 0.7
   });
@@ -81,7 +86,6 @@ function displayResponse(message) {
   const responseDisplay = document.getElementById('responseDisplay');
   responseDisplay.textContent = message;
 }
-
 
 document.getElementById('sendButton').addEventListener('click', () => {
   const chatInput = document.getElementById('chatInput').value;
