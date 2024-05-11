@@ -1,59 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Chat Now</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 40px;
-      padding: 0;
-      color: #333;
-    }
-    .chat-container {
-      max-width: 600px;
-      margin: auto;
-      padding: 20px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
-    #chatInput {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-    #sendButton {
-      display: inline-block;
-      padding: 10px 20px;
-      margin-bottom: 20px;
-      background-color: #007BFF;
-      color: #FFF;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    #sendButton:hover {
-      background-color: #0056b3;
-    }
-    #responseDisplay {
-      white-space: pre-wrap;
-      background-color: #f8f8f8;
-      padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Chat Now</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif; 
+            margin: 0;
+            padding: 40px;
+            background-color: #f4f4f9; 
+            color: #333;
+        }
+        .chat-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #ffffff; 
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        #chatInput {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            box-sizing: border-box; 
+            font-size: 16px; 
+        }
+        #sendButton {
+            display: block;
+            width: 100%;
+            padding: 12px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s; 
+            font-weight: bold;
+        }
+        #sendButton:hover {
+            background-color: #0056b3; 
+        }
+        #responseDisplay {
+            margin-top: 20px;
+            white-space: pre-wrap;
+            background-color: #f8f8f8;
+            padding: 10px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            height: 150px; 
+            overflow-y: auto; 
+        }
+    </style>
 </head>
 <body>
-  <div class="chat-container">
-    <h1>Lets Chat!</h1>
-    <textarea id="chatInput" rows="3" placeholder="Type your message..."></textarea>
-    <button id="sendButton">SEND</button>
-    <div id="responseDisplay"></div>
-  </div>
-  <script src="script.js"></script>
+    <div class="chat-container">
+        <h1>Let's Chat!</h1>
+        <textarea id="chatInput" rows="4" placeholder="Type your message here..."></textarea>
+        <button id="sendButton">SEND</button>
+        <div id="responseDisplay"></div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
