@@ -1,6 +1,6 @@
 /**
- * Initializes and retrieves the OpenAI API Key from the Properties Service.
- * @returns {string} The OpenAI API Key.
+ Initializes and retrieves the OpenAI API Key from the Properties Service.
+
  */
 function getOpenAiApiKey() {
   const properties = PropertiesService.getScriptProperties();
@@ -13,7 +13,7 @@ function getOpenAiApiKey() {
 
 /**
  * Web app endpoint that returns the OpenAI API Key in JSON format.
- * @returns {ContentService} The API Key as a JSON object.
+
  */
 function doGet() {
   const apiKey = getOpenAiApiKey();
